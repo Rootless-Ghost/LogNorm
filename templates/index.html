@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% block title %}LogNorm — Upload &amp; Normalize{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Upload &amp; Normalize</h1>
+    <p class="page-subtitle">Select a source type, upload a log file, and convert it to ECS-lite JSON</p>
+</div>
+
+<!-- Step 1: Source type -->
+<div class="card">
+    <div class="card-header">
+        <span class="card-title">Step 1 — Select Source Type</span>
+        <span id="selected-source-display" style="font-family:var(--font-mono);font-size:12px;color:var(--accent-green);"></span>
+    </div>
+
+    <div class="source-grid">
+        {% for src in sources %}
+        {% set info = source_descriptions.get(src, {}) %}
+        <button class="source-btn" data-source="{{ src }}">
+            <span class="source-icon">
+                {% if src == 'sysmon' %}&#x1F5D6;
+                {% elif src == 'wel' %}&#x1F4DC;
+                {% elif src == 'wazuh' %}&#x1F6E1;
+                {% elif src == 'syslog' %}&#x1F427;
+                {% else %}&#x1F50C;{% endif %}
+            </span>
+            <span class="source-badge {{ src }}">{{ src }}</span>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">
+                {{ info.get('label', src) }}
+            </div>
+        </button>
+        {% endfor %}
+    </div>
+
+    <!-- Source description -->
+    <div id="source-info" style="display:none;">
+        {% for src, info in source_descriptions.items() %}
+        <div class="source-detail" data-source="{{ src }}" style="display:none;">
+            <div style="font-size:13px;color:var(--text-secondary);padding:12px 0 0;">
+                <strong>{{ info.label }}</strong> — {{ info.description }}
+                <br><span style="color:var(--text-muted);">Covers: {{ info.events }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Step 2: Upload -->
+<div class="card">
+    <div class="card-header">
+        <span class="card-title">Step 2 — Upload Log File</span>
+    </div>
+
+    <div class="upload-zone" id="upload-zone">
+        <input type="file" id="file-input" accept=".xml,.csv,.json,.log,.txt,.evtx,.cef">
+        <div class="upload-icon">&#x1F4E4;</div>
+        <div class="upload-title">Drop file here or click to browse</div>
+        <div class="upload-subtitle">
+            Sysmon XML &middot; WEL CSV &middot; Wazuh JSON &middot; auth.log &middot; CEF
+        </div>
+        <div class="upload-filename" id="upload-filename"></div>
+    </div>
+</div>
+
+<!-- Step 3: Normalize -->
+<div class="card">
+    <div class="card-header">
+        <span class="card-title">Step 3 — Normalize</span>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn btn-primary" id="normalize-btn">
+            &#x26A1; Normalize
+        </button>
+    </div>
+
+    <!-- Result bar -->
+    <div id="result-bar" style="display:none;margin-top:16px;" class="result-bar"></div>
+</div>
+
+<!-- Stats -->
+<div class="stats-grid" id="stats-grid" style="display:none;">
+    <div class="stat-card total">
+        <div class="stat-value" id="stat-total">0</div>
+        <div class="stat-label">Total Input</div>
+    </div>
+    <div class="stat-card success">
+        <div class="stat-value" id="stat-success">0</div>
+        <div class="stat-label">Normalized</div>
+    </div>
+    <div class="stat-card failed">
+        <div class="stat-value" id="stat-failed">0</div>
+        <div class="stat-label">Failed</div>
+    </div>
+</div>
+
+<!-- Results section -->
+<div id="results-section" style="display:none;">
+    <div class="card">
+        <div class="card-header">
+            <span class="card-title">Normalized Events</span>
+            <div id="export-actions" style="display:none;" class="btn-group">
+                <button class="btn btn-export" id="export-json-btn">&#x1F4E5; Export JSON</button>
+                <button class="btn btn-export" id="export-csv-btn">&#x1F4C4; Export CSV</button>
+            </div>
+        </div>
+
+        <div style="overflow-x:auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Timestamp</th>
+                        <th>Host</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                        <th>Sev</th>
+                        <th>Process / User / IP</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="results-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Show/hide source description on selection
+document.querySelectorAll('.source-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const src = btn.dataset.source;
+        document.getElementById('source-info').style.display = 'block';
+        document.querySelectorAll('.source-detail').forEach(d => {
+            d.style.display = d.dataset.source === src ? 'block' : 'none';
+        });
+    });
+});
+
+// Show stats grid after normalize
+const origRun = window.runNormalize;
+// Hook stats display into result
+const origShowBar = window.showResultBar;
+window.updateResultStats = function(events, failed) {
+    const grid = document.getElementById('stats-grid');
+    if (grid) grid.style.display = 'grid';
+    const t = document.getElementById('stat-total');
+    const s = document.getElementById('stat-success');
+    const f = document.getElementById('stat-failed');
+    if (t) t.textContent = events.length + failed;
+    if (s) s.textContent = events.length;
+    if (f) f.textContent = failed;
+};
+</script>
+{% endblock %}

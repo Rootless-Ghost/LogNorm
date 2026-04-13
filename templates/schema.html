@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}LogNorm — ECS-lite Schema Reference{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">ECS-lite Schema Reference</h1>
+    <p class="page-subtitle">
+        LogNorm ECS-lite v1.0 — the common data currency for DriftWatch, ClusterIQ, AtomicLoop, and HuntForge
+    </p>
+</div>
+
+<!-- Source adapters overview -->
+<div class="card">
+    <div class="card-header">
+        <span class="card-title">Supported Source Adapters</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
+        {% for src, info in source_descriptions.items() %}
+        <div style="background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius);padding:16px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+                <span class="source-badge {{ src }}" style="font-size:11px;">{{ src }}</span>
+                <strong>{{ info.label }}</strong>
+            </div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-bottom:6px;">
+                {{ info.description }}
+            </div>
+            <div style="font-size:11px;color:var(--text-muted);">
+                &#x2192; {{ info.events }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Field reference table -->
+<div class="card">
+    <div class="card-header">
+        <span class="card-title">Field Reference — schema_version 1.0</span>
+        <span style="font-size:12px;color:var(--text-muted);">{{ fields|length }} fields defined</span>
+    </div>
+
+    <div style="overflow-x:auto;">
+        <table class="schema-table">
+            <thead>
+                <tr>
+                    <th style="width:260px;">Field Path</th>
+                    <th style="width:80px;">Type</th>
+                    <th style="width:70px;">Required</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set current_section = namespace(value='') %}
+                {% for path, ftype, required, desc in fields %}
+                    {% set section = path.split('.')[0] %}
+                    {% if section != current_section.value %}
+                        {% set current_section.value = section %}
+                        <tr class="schema-group-row">
+                            <td colspan="4">{{ section }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td>{{ path }}</td>
+                        <td>{{ ftype }}</td>
+                        <td class="{{ 'required-yes' if required else 'required-no' }}">
+                            {{ 'yes' if required else '—' }}
+                        </td>
+                        <td style="font-size:13px;color:var(--text-secondary);">{{ desc }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Sample event -->
+<div class="card">
+    <div class="card-header">
+        <span class="card-title">Example ECS-lite Event (Sysmon EventID 1 — Process Creation)</span>
+    </div>
+    <pre class="json-pre">{
+  "schema_version": "1.0",
+  "event": {
+    "id":               "a7f3c2b1-4e8d-4a6f-b2c1-d3e5f7a9b1c2",
+    "created":          "2026-04-13T10:30:00.000Z",
+    "source_type":      "sysmon",
+    "category":         ["process"],
+    "type":             ["start"],
+    "action":           "Process created",
+    "outcome":          "unknown",
+    "severity":         0,
+    "original_event_id":"1"
+  },
+  "host": {
+    "name":     "Win11x01",
+    "hostname": "Win11x01",
+    "os":       { "type": "windows" }
+  },
+  "process": {
+    "pid":          4812,
+    "ppid":         1204,
+    "name":         "powershell.exe",
+    "executable":   "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "command_line": "powershell.exe -enc SQBFAFgA...",
+    "hash": {
+      "md5":    "7353f60b1739074eb17c5f4dddefe239",
+      "sha256": "de96a6e69944335375dc1ac238336066889d9ffc7d73628ef4fe1b1b160ab32c"
+    },
+    "parent": {
+      "pid":          1204,
+      "name":         "cmd.exe",
+      "executable":   "C:\\Windows\\System32\\cmd.exe",
+      "command_line": "cmd.exe /c start powershell"
+    }
+  },
+  "user": {
+    "name":   "jdoe",
+    "domain": "WIN11X01"
+  },
+  "log": {
+    "source_type":       "sysmon",
+    "source_tool":       "sysmon",
+    "original_event_id": "1",
+    "original_log": {
+      "EventID":    "1",
+      "RuleName":   "technique_id=T1059.001",
+      "Computer":   "Win11x01",
+      "TimeCreated":"2026-04-13T10:30:00.000000000Z"
+    }
+  },
+  "tags": ["T1059.001"]
+}</pre>
+</div>
+
+<!-- Integration note -->
+<div class="card" style="border-color:rgba(63,185,80,0.25);">
+    <div class="card-header">
+        <span class="card-title" style="color:var(--accent-green);">Integration Contract</span>
+    </div>
+    <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+        <p>All Nebula Forge pipeline tools accept ECS-lite events at these endpoints:</p>
+        <ul style="margin:12px 0 0 20px;line-height:2;">
+            <li><strong>DriftWatch</strong> — <code>POST /api/analyze</code> · <code>POST /api/validate</code></li>
+            <li><strong>ClusterIQ</strong>  — <code>POST /api/cluster</code></li>
+            <li><strong>AtomicLoop</strong> — emits ECS-lite events on <code>POST /api/run</code> (normalize=true)</li>
+            <li><strong>HuntForge</strong>  — reads expected artifact fields from ECS-lite schema</li>
+        </ul>
+        <p style="margin-top:12px;">
+            <strong>Required fields</strong>: <code>event.id</code>, <code>event.created</code>,
+            <code>event.source_type</code>, <code>log.source_type</code>.
+            All other fields are optional and omitted when empty.
+        </p>
+        <p style="margin-top:8px;">
+            <strong>Pipeline call pattern</strong>:
+            <code>POST /api/normalize/batch</code> → save to disk or pass events array directly to downstream tool.
+        </p>
+    </div>
+</div>
+{% endblock %}

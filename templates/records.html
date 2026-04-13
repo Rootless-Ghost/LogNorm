@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}LogNorm — Normalized Records{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">Normalized Records</h1>
+    <p class="page-subtitle">Browse, search, and export all events stored in the database</p>
+</div>
+
+<!-- Filter bar -->
+<div class="card">
+    <div class="filter-bar">
+        <input class="filter-input" id="search-input" type="text"
+               placeholder="Search action, host, process, IP…" style="flex:1;min-width:200px;">
+        <select class="filter-select" id="source-filter">
+            <option value="">All sources</option>
+            {% for src in sources %}
+            <option value="{{ src }}">{{ src }}</option>
+            {% endfor %}
+        </select>
+        <a href="/api/export?format=json" class="btn btn-export">&#x1F4E5; Export All JSON</a>
+        <a href="/api/export?format=csv"  class="btn btn-export">&#x1F4C4; Export All CSV</a>
+        <button class="btn btn-danger" id="clear-records-btn">&#x1F5D1; Clear All</button>
+    </div>
+</div>
+
+<!-- Loading spinner -->
+<div class="loading-spinner" id="records-spinner">
+    <div class="spinner"></div>
+    Loading records…
+</div>
+
+<!-- Records table -->
+<div class="card" id="records-container">
+    <div style="overflow-x:auto;">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Source</th>
+                    <th>Timestamp</th>
+                    <th>Host</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                    <th>Sev</th>
+                    <th>Process / User / IP</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="records-tbody">
+                <tr><td colspan="8">
+                    <div class="empty-state">
+                        <div class="empty-icon">&#x1F4ED;</div>
+                        <div class="empty-title">No records yet</div>
+                        <div class="empty-sub">Go to <a href="/" style="color:var(--accent-green);">Upload &amp; Normalize</a> to add events.</div>
+                    </div>
+                </td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination"></div>
+</div>
+{% endblock %}

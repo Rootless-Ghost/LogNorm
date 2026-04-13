@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LogNorm{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="app-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="/" class="sidebar-logo">
+                <div class="logo-icon">LN</div>
+                <div>
+                    <div class="logo-text">LogNorm</div>
+                    <div class="logo-version">v1.0.0</div>
+                </div>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-section-title">Normalize</div>
+                <a href="/" class="nav-link">
+                    <span class="nav-icon">&#x2B06;</span>
+                    Upload &amp; Normalize
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Database</div>
+                <a href="/records" class="nav-link">
+                    <span class="nav-icon">&#x1F4CB;</span>
+                    Normalized Records
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Reference</div>
+                <a href="/schema" class="nav-link">
+                    <span class="nav-icon">&#x1F4D6;</span>
+                    ECS-lite Schema
+                </a>
+            </div>
+
+            <div class="nav-section" style="margin-top:auto;padding-top:16px;border-top:1px solid var(--border-color);">
+                <div class="nav-section-title">Sources</div>
+                <div style="padding:8px 12px;font-size:12px;color:var(--text-muted);line-height:1.8;">
+                    <span class="source-badge sysmon">Sysmon</span>&nbsp;
+                    <span class="source-badge wel">WEL</span>&nbsp;
+                    <span class="source-badge wazuh">Wazuh</span>&nbsp;
+                    <span class="source-badge syslog">syslog</span>&nbsp;
+                    <span class="source-badge cef">CEF</span>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+
+<!-- Event Detail Modal -->
+<div class="modal-overlay" id="event-modal">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title" id="event-modal-title">Event Detail</span>
+            <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+        </div>
+        <div class="event-viewer" id="event-modal-body"></div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

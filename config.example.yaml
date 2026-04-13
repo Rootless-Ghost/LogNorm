@@ -1,0 +1,43 @@
+# LogNorm configuration — example
+# =================================
+# Copy this file to config.yaml and adjust values to match your environment.
+
+# -----------------------------------------------------------------------
+# Server
+# -----------------------------------------------------------------------
+port: 5006
+
+# -----------------------------------------------------------------------
+# Database
+# The SQLite database file for storing normalized events.
+# A relative path is resolved from the LogNorm root directory.
+# -----------------------------------------------------------------------
+db_path: "./lognorm.db"
+
+# -----------------------------------------------------------------------
+# Output directory
+# Fallback JSON files are written here when the database is unavailable.
+# -----------------------------------------------------------------------
+output_dir: "./output"
+
+# -----------------------------------------------------------------------
+# Wazuh integration
+# Used when pulling live alerts directly from the Wazuh API.
+# Set to your actual Wazuh manager address.
+# -----------------------------------------------------------------------
+wazuh:
+  host: "192.168.46.100"
+  port: 55000
+  user: "wazuh-wui"
+  # password: "your-password"    # do not commit this value
+
+# -----------------------------------------------------------------------
+# Normalization settings
+# -----------------------------------------------------------------------
+normalization:
+  # Maximum file size (MB) accepted for batch upload
+  max_file_mb: 50
+  # Truncate original_log to this many characters (0 = no limit)
+  original_log_max_chars: 4096
+  # Auto-save to DB on every normalize call
+  auto_save: true
