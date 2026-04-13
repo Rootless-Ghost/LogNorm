@@ -279,6 +279,8 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 Built by [Rootless-Ghost](https://github.com/Rootless-Ghost) 
 
+*Nebula Forge — LogNorm v1.0.0*
+
 </div>
 
-*Nebula Forge — LogNorm v1.0.0*
+
