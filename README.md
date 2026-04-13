@@ -279,7 +279,7 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 Built by [Rootless-Ghost](https://github.com/Rootless-Ghost) 
 
-*Nebula Forge — LogNorm v1.0.0*
+Part of the **Nebula Forge** security tools suite.
 
 </div>
 
