@@ -220,7 +220,8 @@ def api_normalize_batch():
         try:
             raw = raw_bytes.decode("utf-8", errors="replace")
         except Exception as exc:
-            return jsonify({"success": False, "error": f"Could not decode file: {exc}"}), 400
+            app.logger.exception("Failed to decode uploaded file as UTF-8")
+            return jsonify({"success": False, "error": "Could not decode uploaded file"}), 400
 
         result = _engine.normalize_text(raw, source_type,
                                          filename=uploaded.filename)
