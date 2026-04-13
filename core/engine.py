@@ -15,6 +15,7 @@ from typing import Optional
 
 from adapters import get_adapter, SUPPORTED_SOURCES
 from core.storage import Storage
+from werkzeug.utils import secure_filename
 
 logger = logging.getLogger(__name__)
 
@@ -165,7 +166,8 @@ class NormalizationEngine:
                            events: list, failed: int) -> None:
         os.makedirs(self._output_dir, exist_ok=True)
         ts = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-        fname = f"fallback_{source_type}_{ts}_{session_id[:8]}.json"
+        safe_source_type = secure_filename(source_type) or "unknown"
+        fname = f"fallback_{safe_source_type}_{ts}_{session_id[:8]}.json"
         path  = os.path.join(self._output_dir, fname)
         payload = {
             "session_id": session_id,
