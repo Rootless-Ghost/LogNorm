@@ -264,10 +264,10 @@ LogNorm/
 ## Home lab
 
 Validated against:
-- **Wazuh** 4.14.4 at `192.168.46.100` — Wazuh adapter targets this alert format
-- **Win11x01** — Sysmon (SwiftOnSecurity config) + EndpointTriage Security.csv
-- **SOC101-Ubuntu** — auth.log / journald output
-- **Splunk on SOC101-Ubuntu** — WEL CSV exports
+- **Wazuh** 4.14.4 at `<YOUR_WAZUH_IP>` — Wazuh adapter targets this alert format
+- **Windows Agent** — Sysmon (SwiftOnSecurity config) + EndpointTriage Security.csv
+- **Linux Agent** — auth.log / journald output
+- **Splunk on Linux Agent** — WEL CSV exports
 
 ---
 ## License
