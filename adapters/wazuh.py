@@ -138,6 +138,7 @@ class WazuhAdapter(BaseAdapter):
         logon_type = _safe_get(wed, "logonType")
         proc_name  = _safe_get(wed, "newProcessName") or _safe_get(wed, "processName")
         proc_id    = safe_int(_safe_get(wed, "newProcessId") or _safe_get(wed, "processId"))
+        win_cmd    = _safe_get(wed, "commandLine")
 
         # Outcome from Windows logon events
         outcome = _WEL_OUTCOME.get(w_event_id, "unknown")
@@ -190,7 +191,7 @@ class WazuhAdapter(BaseAdapter):
             process_pid       = proc_id,
             process_name      = _os.path.basename(proc_name) if proc_name else "",
             process_exe       = proc_name,
-            process_cmdline   = audit_cmd,
+            process_cmdline   = win_cmd or audit_cmd,
             src_ip            = ip_addr,
             file_path         = file_path,
             file_name         = file_name,
