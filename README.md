@@ -29,22 +29,16 @@ LogNorm ingests raw log files from five source types and normalizes every record
 
 ## Screenshots
 
-### Upload & Normalize
+### Dashbaord
 
-![Upload & Normalize](docs/screenshots/upload-normalize.png)
-*Upload view — select source type (Sysmon/WEL/Wazuh/syslog/CEF) and drop your log file*
+![LogNorm Dashboard](docs/LogNorm-Dashboard.png)
 
-### Normalized Records Browser
 
-![Normalized Records Browser](docs/screenshots/records-browser.png)
-*ECS-lite records table with field filtering and pagination*
+### Upload
 
-### ECS-lite Schema Reference
+![LogNorm Upload](docs/LogNorm-upload.png)
 
-![ECS-lite Schema Reference](docs/screenshots/schema-reference.png)
-*Built-in schema reference page listing all supported ECS-lite fields*
 
----
 
 ---
 
