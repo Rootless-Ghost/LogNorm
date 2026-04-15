@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="cpv3E5xKTZK2OUsYRFUQ">
+    <mxGraphModel dx="2054" dy="1109" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="light-dark(#FFFFFF,#000000)" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=none;fontColor=light-dark(#000000,#999999);" value="active" vertex="1">
+          <mxGeometry height="20" width="40" x="410" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-3" parent="1" style="rounded=1;whiteSpace=wrap;fontFamily=Tahoma;labelBackgroundColor=none;labelBorderColor=none;textShadow=0;gradientColor=none;gradientDirection=radial;glass=1;shadow=0;strokeColor=light-dark(#000000,#B266FF);fillColor=light-dark(#FFFFFF,#B266FF);fontColor=default;html=1;fontSize=17;fontStyle=1" value="LogNorm&lt;br&gt;:5006" vertex="1">
+          <mxGeometry height="60" width="120" x="260" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Tahoma;fillColor=light-dark(#FFFFFF,#B266FF);strokeColor=none;opacity=40;textOpacity=50;fontSize=15;" value="AtomicLoop&lt;div&gt;:5011&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-8" edge="1" parent="1" source="TuGQzVnH9HecZ6RVMLeU-4" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=light-dark(#FFFFFF,#B266FF);startSize=8;endSize=4;" target="TuGQzVnH9HecZ6RVMLeU-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="460" y="290" as="sourcePoint" />
+            <mxPoint x="510" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-9" edge="1" parent="1" source="TuGQzVnH9HecZ6RVMLeU-3" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#B266FF);startSize=8;endSize=8;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="460" y="290" as="sourcePoint" />
+            <mxPoint x="490" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-10" edge="1" parent="1" source="TuGQzVnH9HecZ6RVMLeU-4" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;opacity=30;strokeColor=light-dark(#000000,#B266FF);" target="TuGQzVnH9HecZ6RVMLeU-13" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="460" y="290" as="sourcePoint" />
+            <mxPoint x="200" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-11" edge="1" parent="1" source="TuGQzVnH9HecZ6RVMLeU-13" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=light-dark(#000000,#B266FF);opacity=30;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="430" y="350" as="sourcePoint" />
+            <mxPoint x="490" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-12" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#B266FF);opacity=30;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="550" y="240" as="sourcePoint" />
+            <mxPoint x="550" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Tahoma;fillColor=light-dark(#FFFFFF,#B266FF);strokeColor=none;opacity=40;textOpacity=50;fontSize=15;" value="AtomicLoop&lt;div&gt;:5011&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="260" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Tahoma;fillColor=light-dark(#FFFFFF,#B266FF);strokeColor=none;opacity=40;textOpacity=50;fontSize=15;" value="AtomicLoop&lt;div&gt;:5011&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="490" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Tahoma;fillColor=light-dark(#FFFFFF,#B266FF);strokeColor=none;opacity=40;textOpacity=50;fontSize=15;" value="AtomicLoop&lt;div&gt;:5011&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="490" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=light-dark(#000000,#808080);" value="&amp;nbsp;simulate -&amp;gt; normalize -&amp;gt; cluster -&amp;gt; drift -&amp;gt; repeat -&amp;gt;" vertex="1">
+          <mxGeometry height="30" width="390" x="220" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#B266FF);fillColor=light-dark(#000000,#B266FF);" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="90" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-18" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=light-dark(#000000,#B266FF);fillColor=light-dark(#000000,#B266FF);opacity=40;" value="" vertex="1">
+          <mxGeometry height="20" width="20" x="200" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-19" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontFamily=Tahoma;fontColor=light-dark(#000000,#B3B3B3);" value="this tool" vertex="1">
+          <mxGeometry height="30" width="60" x="110" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-20" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontColor=light-dark(#000000,#B3B3B3);" value="pipeline peers" vertex="1">
+          <mxGeometry height="30" width="100" x="220" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="TuGQzVnH9HecZ6RVMLeU-21" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;h2&gt;Nebula Forge Detection Suite v2&lt;/h2&gt;&lt;div&gt;purple-loop pipeline LogNorm highlighted&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="350" x="145" y="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
