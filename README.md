@@ -2,7 +2,7 @@
 
 # LogNorm
 
-> Log Source Normalizer — Sysmon / WEL / Wazuh / syslog / CEF → ECS-lite schema
+ Log Source Normalizer — Sysmon / WEL / Wazuh / syslog / CEF → ECS-lite schema
 
 Part of the **Nebula Forge** detection engineering platform. LogNorm is the normalization gateway for the pipeline: its ECS-lite JSON output is the shared data currency accepted by DriftWatch, ClusterIQ, AtomicLoop, and HuntForge.
 
