@@ -1,0 +1,98 @@
+<svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg" width="540" height="320">
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="540" height="320" fill="#0d0b1a" rx="12"/>
+
+  <!-- Title -->
+  <text x="270" y="38" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="13" font-weight="700" fill="#e2e8f0">Nebula Forge Detection Suite v2</text>
+  <text x="270" y="56" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="10" fill="#94a3b8">purple-loop pipeline  ·  LogNorm highlighted</text>
+
+  <!-- Pipeline label row -->
+  <text x="270" y="280" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="9" fill="#3b3560">
+    simulate → normalize → cluster → hunt → drift → repeat
+  </text>
+
+<defs>
+    <marker id="arr_atomicloop_lognorm" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#a78bfa" opacity="1.0"/>
+    </marker>
+  </defs>
+  <line x1="143.0" y1="116.0" x2="247.0" y2="116.0" stroke="#a78bfa" stroke-width="1.8" opacity="1.0" marker-end="url(#arr_atomicloop_lognorm)"/>
+<defs>
+    <marker id="arr_lognorm_clusteriq" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#a78bfa" opacity="1.0"/>
+    </marker>
+  </defs>
+  <line x1="303.0" y1="116.0" x2="407.0" y2="116.0" stroke="#a78bfa" stroke-width="1.8" opacity="1.0" marker-end="url(#arr_lognorm_clusteriq)"/>
+<defs>
+    <marker id="arr_clusteriq_huntforge" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2e2b45" opacity="0.4"/>
+    </marker>
+  </defs>
+  <line x1="435.0" y1="144.0" x2="435.0" y2="218.0" stroke="#2e2b45" stroke-width="1.8" opacity="0.4" marker-end="url(#arr_clusteriq_huntforge)"/>
+<defs>
+    <marker id="arr_huntforge_driftwatch" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2e2b45" opacity="0.4"/>
+    </marker>
+  </defs>
+  <line x1="407.0" y1="246.0" x2="303.0" y2="246.0" stroke="#2e2b45" stroke-width="1.8" opacity="0.4" marker-end="url(#arr_huntforge_driftwatch)"/>
+<defs>
+    <marker id="arr_driftwatch_atomicloop" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2e2b45" opacity="0.4"/>
+    </marker>
+  </defs>
+  <line x1="253.3" y1="228.3" x2="136.7" y2="133.7" stroke="#2e2b45" stroke-width="1.8" opacity="0.4" marker-end="url(#arr_driftwatch_atomicloop)"/>
+  <rect x="60" y="90" width="110" height="52" rx="8" ry="8"
+        fill="#1e1b2e" stroke="#3b3560" stroke-width="1" />
+  <text x="115" y="112" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="12" font-weight="500" fill="#6b6a8a">AtomicLoop</text>
+  <text x="115" y="128" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="10" fill="#4b4870">:5011</text>
+  <rect x="220" y="90" width="110" height="52" rx="8" ry="8"
+        fill="#7c3aed" stroke="#a78bfa" stroke-width="2" filter="url(#glow)"/>
+  <text x="275" y="112" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="12" font-weight="700" fill="#ffffff">LogNorm</text>
+  <text x="275" y="128" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="10" fill="#c4b5fd">:5006</text>
+  <rect x="380" y="90" width="110" height="52" rx="8" ry="8"
+        fill="#1e1b2e" stroke="#3b3560" stroke-width="1" />
+  <text x="435" y="112" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="12" font-weight="500" fill="#6b6a8a">ClusterIQ</text>
+  <text x="435" y="128" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="10" fill="#4b4870">:5009</text>
+  <rect x="380" y="220" width="110" height="52" rx="8" ry="8"
+        fill="#1e1b2e" stroke="#3b3560" stroke-width="1" />
+  <text x="435" y="242" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="12" font-weight="500" fill="#6b6a8a">HuntForge</text>
+  <text x="435" y="258" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="10" fill="#4b4870">:5007</text>
+  <rect x="220" y="220" width="110" height="52" rx="8" ry="8"
+        fill="#1e1b2e" stroke="#3b3560" stroke-width="1" />
+  <text x="275" y="242" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="12" font-weight="500" fill="#6b6a8a">DriftWatch</text>
+  <text x="275" y="258" text-anchor="middle" font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="10" fill="#4b4870">:5008</text>
+
+  <!-- Active badge -->
+  <rect x="336" y="107" width="52" height="18" rx="4"
+        fill="#7c3aed" opacity="0.25" stroke="#a78bfa" stroke-width="0.8"/>
+  <text x="362" y="120" text-anchor="middle"
+        font-family="'Segoe UI',system-ui,sans-serif" font-size="9" fill="#c4b5fd">active</text>
+
+
+  <!-- Legend -->
+  <rect x="12" y="290" width="10" height="10" rx="2" fill="#7c3aed" stroke="#a78bfa" stroke-width="1"/>
+  <text x="26" y="299" font-family="'Segoe UI',system-ui,sans-serif" font-size="9" fill="#94a3b8">this tool</text>
+  <rect x="90" y="290" width="10" height="10" rx="2" fill="#1e1b2e" stroke="#3b3560" stroke-width="1"/>
+  <text x="104" y="299" font-family="'Segoe UI',system-ui,sans-serif" font-size="9" fill="#6b6a8a">pipeline peers</text>
+
+</svg>
