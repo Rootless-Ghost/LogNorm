@@ -6,15 +6,16 @@
 
 Part of the **Nebula Forge** detection engineering platform. LogNorm is the normalization gateway for the pipeline: its ECS-lite JSON output is the shared data currency accepted by DriftWatch, ClusterIQ, AtomicLoop, and HuntForge.
 
+![version](https://img.shields.io/badge/version-v1.0.0-blueviolet?style=flat-square) ![port](https://img.shields.io/badge/port-5006-5d5d5d?style=flat-square) ![python](https://img.shields.io/badge/python-3.10+-3776AB?style=flat-square&logo=python) ![framework](https://img.shields.io/badge/framework-Flask-000000?style=flat-square&logo=flask) ![part%20of](https://img.shields.io/badge/part%20of-Nebula%20Forge-7c3aed?style=flat-square) ![license](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+
+
 </div>
 
----
 
 ## What it does
 
 LogNorm ingests raw log files from five source types and normalizes every record to a consistent **ECS-lite** JSON schema. Normalized events are stored in SQLite and can be exported as JSON or CSV. The Flask web UI provides an upload → normalize → view → export workflow; the CLI handles file-based automation.
 
-![version](https://img.shields.io/badge/version-v1.0.0-blueviolet?style=flat-square) ![port](https://img.shields.io/badge/port-5006-5d5d5d?style=flat-square) ![python](https://img.shields.io/badge/python-3.10+-3776AB?style=flat-square&logo=python) ![framework](https://img.shields.io/badge/framework-Flask-000000?style=flat-square&logo=flask) ![part%20of](https://img.shields.io/badge/part%20of-Nebula%20Forge-7c3aed?style=flat-square) ![license](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 
 ---
 
