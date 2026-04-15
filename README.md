@@ -14,6 +14,37 @@ Part of the **Nebula Forge** detection engineering platform. LogNorm is the norm
 
 LogNorm ingests raw log files from five source types and normalizes every record to a consistent **ECS-lite** JSON schema. Normalized events are stored in SQLite and can be exported as JSON or CSV. The Flask web UI provides an upload → normalize → view → export workflow; the CLI handles file-based automation.
 
+![version](https://img.shields.io/badge/version-v1.0.0-blueviolet?style=flat-square) ![port](https://img.shields.io/badge/port-5006-5d5d5d?style=flat-square) ![python](https://img.shields.io/badge/python-3.10+-3776AB?style=flat-square&logo=python) ![framework](https://img.shields.io/badge/framework-Flask-000000?style=flat-square&logo=flask) ![part%20of](https://img.shields.io/badge/part%20of-Nebula%20Forge-7c3aed?style=flat-square) ![license](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+
+---
+
+## Pipeline Position
+
+![Nebula Forge pipeline — LogNorm highlighted](docs/pipeline.svg)
+
+> **purple-loop:** `AtomicLoop → LogNorm → ClusterIQ → HuntForge → DriftWatch → repeat`
+
+---
+
+## Screenshots
+
+### Upload & Normalize
+
+![Upload & Normalize](docs/screenshots/upload-normalize.png)
+*Upload view — select source type (Sysmon/WEL/Wazuh/syslog/CEF) and drop your log file*
+
+### Normalized Records Browser
+
+![Normalized Records Browser](docs/screenshots/records-browser.png)
+*ECS-lite records table with field filtering and pagination*
+
+### ECS-lite Schema Reference
+
+![ECS-lite Schema Reference](docs/screenshots/schema-reference.png)
+*Built-in schema reference page listing all supported ECS-lite fields*
+
+---
+
 ---
 
 ## Source adapters
