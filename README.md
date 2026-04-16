@@ -29,7 +29,7 @@ LogNorm ingests raw log files from five source types and normalizes every record
 
 ## Screenshots
 
-### Dashbaord
+### Dashboard
 
 ![LogNorm Dashboard](docs/LogNorm-Dashboard.png)
 
@@ -294,7 +294,7 @@ LogNorm/
 ## Home lab
 
 Validated against:
-- **Wazuh** 4.14.4 at `<YOUR_WAZUH_IP>` — Wazuh adapter targets this alert format
+- **Wazuh** 4.14.4 at `<wazuh-host>` — Wazuh adapter targets this alert format
 - **Windows Agent** — Sysmon (SwiftOnSecurity config) + EndpointTriage Security.csv
 - **Linux Agent** — auth.log / journald output
 - **Splunk on Linux Agent** — WEL CSV exports
