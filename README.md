@@ -21,7 +21,7 @@ LogNorm ingests raw log files from five source types and normalizes every record
 
 ## Pipeline Position
 
-![Nebula Forge pipeline — LogNorm highlighted](docs/pipeline.svg)
+![Nebula Forge pipeline — LogNorm highlighted](docs/Pipeline.svg)
 
 > **purple-loop:** `AtomicLoop → LogNorm → ClusterIQ → DriftWatch → HuntForge → repeat`
 
