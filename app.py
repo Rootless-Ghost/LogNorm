@@ -378,8 +378,8 @@ def main() -> None:
     logging.getLogger().setLevel(args.log_level)
     create_app(args.config)
     port = args.port if args.port is not None else int(_config.get("port", 5006))
-    logger.info("LogNorm starting on http://127.0.0.1:%d", port)
-    app.run(debug=args.debug, host="127.0.0.1", port=port)
+    logger.info("LogNorm starting on http://0.0.0.0:%d", port)
+    app.run(debug=args.debug, host="0.0.0.0", port=port)
 
 
 if __name__ == "__main__":
