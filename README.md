@@ -74,6 +74,29 @@ Open `http://127.0.0.1:5006`
 
 ---
 
+## Docker (Nebula Forge suite)
+
+This tool runs as a containerized service in the Nebula Forge suite.
+The recommended way to start everything together:
+
+```bash
+# From the Nebula-Forge repo root
+cp .env.example .env          # add secrets (NVD_API_KEY, ATOMICLOOP_API_KEY, etc.)
+docker compose up -d          # starts all services including lognorm
+```
+
+**Access:** http://localhost:5006
+
+**Standalone container:**
+```bash
+docker build -t lognorm .
+docker run -p 5006:5006 \
+  -e DATABASE_URL=postgresql://nebula:changeme@localhost:5432/nebula_forge \
+  lognorm
+```
+
+---
+
 ## CLI
 
 ```bash
