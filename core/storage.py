@@ -24,9 +24,48 @@ def _now() -> str:
 class Storage:
     def __init__(self, db_path: str):
         self._url = os.environ.get("DATABASE_URL") or db_path
+        self._init_db()
 
     def _connect(self):
         return psycopg2.connect(self._url)
+
+    def _init_db(self) -> None:
+        with self._connect() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    CREATE TABLE IF NOT EXISTS lognorm_sessions (
+                        session_id   TEXT    PRIMARY KEY,
+                        source_type  TEXT    NOT NULL DEFAULT '',
+                        filename     TEXT    NOT NULL DEFAULT '',
+                        created_at   TEXT    NOT NULL DEFAULT '',
+                        total_events INTEGER NOT NULL DEFAULT 0,
+                        failed_count INTEGER NOT NULL DEFAULT 0
+                    )
+                """)
+                cur.execute("""
+                    CREATE TABLE IF NOT EXISTS lognorm_events (
+                        event_id     TEXT    PRIMARY KEY,
+                        session_id   TEXT    NOT NULL DEFAULT '',
+                        source_type  TEXT    NOT NULL DEFAULT '',
+                        created_at   TEXT    NOT NULL DEFAULT '',
+                        category     TEXT    NOT NULL DEFAULT '',
+                        event_action TEXT    NOT NULL DEFAULT '',
+                        severity     INTEGER NOT NULL DEFAULT 0,
+                        host_name    TEXT    NOT NULL DEFAULT '',
+                        process_name TEXT    NOT NULL DEFAULT '',
+                        user_name    TEXT    NOT NULL DEFAULT '',
+                        src_ip       TEXT    NOT NULL DEFAULT '',
+                        dst_ip       TEXT    NOT NULL DEFAULT '',
+                        ecs_json     TEXT    NOT NULL DEFAULT '',
+                        indexed_at   TEXT    NOT NULL DEFAULT ''
+                    )
+                """)
+                cur.execute("""
+                    CREATE INDEX IF NOT EXISTS idx_lognorm_events_search
+                    ON lognorm_events (event_action, host_name, process_name,
+                                       user_name, src_ip, dst_ip)
+                """)
+            conn.commit()
 
     # ── Write ────────────────────────────────────────────────────────────
 
@@ -158,7 +197,7 @@ class Storage:
         with self._connect() as conn:
             with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
                 cur.execute(
-                    f"SELECT ecs_json FROM lognorm_events {where} ORDER BY indexed_at DESC",
+                    f"SELECT ecs_json FROM lognorm_events {where} ORDER BY indexed_at DESC LIMIT 10000",
                     params,
                 )
                 return [json.loads(r["ecs_json"]) for r in cur.fetchall()]
