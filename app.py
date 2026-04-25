@@ -86,6 +86,14 @@ _config: dict = {}
 _engine: NormalizationEngine = None  # type: ignore
 
 
+@app.after_request
+def _set_security_headers(response):
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    return response
+
+
 def create_app(config_path: str = "config.yaml") -> Flask:
     global _config, _engine
     _config = load_config(config_path)
