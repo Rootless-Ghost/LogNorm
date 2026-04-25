@@ -13,6 +13,8 @@ from typing import Optional
 
 import psycopg2
 import psycopg2.extras
+from contextlib import contextmanager
+from psycopg2.pool import ThreadedConnectionPool
 
 logger = logging.getLogger(__name__)
 
@@ -23,14 +25,23 @@ def _now() -> str:
 
 class Storage:
     def __init__(self, db_path: str):
-        self._url = os.environ.get("DATABASE_URL") or db_path
+        url = os.environ.get("DATABASE_URL") or db_path
+        self._pool = ThreadedConnectionPool(minconn=1, maxconn=10, dsn=url)
         self._init_db()
 
-    def _connect(self):
-        return psycopg2.connect(self._url)
+    @contextmanager
+    def _get_conn(self):
+        conn = self._pool.getconn()
+        try:
+            yield conn
+        except Exception:
+            conn.rollback()
+            raise
+        finally:
+            self._pool.putconn(conn)
 
     def _init_db(self) -> None:
-        with self._connect() as conn:
+        with self._get_conn() as conn:
             with conn.cursor() as cur:
                 cur.execute("""
                     CREATE TABLE IF NOT EXISTS lognorm_sessions (
@@ -78,7 +89,7 @@ class Storage:
         failed: int,
     ) -> None:
         now = _now()
-        with self._connect() as conn:
+        with self._get_conn() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     "INSERT INTO lognorm_sessions "
@@ -116,7 +127,7 @@ class Storage:
     # ── Read ─────────────────────────────────────────────────────────────
 
     def list_sessions(self, limit: int = 50) -> list:
-        with self._connect() as conn:
+        with self._get_conn() as conn:
             with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
                 cur.execute(
                     "SELECT * FROM lognorm_sessions ORDER BY created_at DESC LIMIT %s",
@@ -155,7 +166,7 @@ class Storage:
 
         where = ("WHERE " + " AND ".join(where_parts)) if where_parts else ""
 
-        with self._connect() as conn:
+        with self._get_conn() as conn:
             with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
                 cur.execute(f"SELECT COUNT(*) FROM lognorm_events {where}", params)
                 total = cur.fetchone()["count"]
@@ -180,7 +191,7 @@ class Storage:
         }
 
     def get_event(self, event_id: str) -> Optional[dict]:
-        with self._connect() as conn:
+        with self._get_conn() as conn:
             with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
                 cur.execute(
                     "SELECT ecs_json FROM lognorm_events WHERE event_id = %s",
@@ -194,7 +205,7 @@ class Storage:
     def export_events_json(self, session_id: str = "") -> list:
         where  = "WHERE session_id = %s" if session_id else ""
         params = [session_id] if session_id else []
-        with self._connect() as conn:
+        with self._get_conn() as conn:
             with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
                 cur.execute(
                     f"SELECT ecs_json FROM lognorm_events {where} ORDER BY indexed_at DESC LIMIT 10000",
@@ -205,7 +216,7 @@ class Storage:
     # ── Delete ───────────────────────────────────────────────────────────
 
     def delete_all(self) -> int:
-        with self._connect() as conn:
+        with self._get_conn() as conn:
             with conn.cursor() as cur:
                 cur.execute("SELECT COUNT(*) FROM lognorm_events")
                 count = cur.fetchone()[0]
